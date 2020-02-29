@@ -1,0 +1,45 @@
+@import './transition.scss';
+html{
+  height: 100%;
+  overflow: hidden;
+    body{
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    .overflow{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pull-left{
+      float: left;
+    }
+    .pull-right{
+      float: right;
+    }
+    .text-center{
+      text-align: center;
+    }
+    .text-left{
+      text-align: left;
+    }
+    .text-right{
+      text-align: right;
+    }
+    .primary{
+      color: #3E80CC!important;
+    }
+    .warning{
+      color: #F9DB61!important;
+    }
+    .success{
+      color: #67C23A!important;
+    }
+    .danger{
+      color: #F56C6C!important;
+    }
+    .info{
+      color: #909399!important;
+    }
+  }
+}
