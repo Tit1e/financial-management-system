@@ -6,7 +6,7 @@ import './plugins/element.js'
 
 import dayjs from 'dayjs'
 import Notify from '@/utils/notify.js'
-
+import './directive'
 import '@/assets/base.scss'
 
 Vue.config.productionTip = false
