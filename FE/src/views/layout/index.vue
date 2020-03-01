@@ -2,17 +2,19 @@
   <el-container class="right-content">
     <el-main>
       <div class="top-header">
-        <div class="pull-left menu-wrap">
-          <router-link class="menu" :class="$route.name === item.route ? 'active' : ''" tag="div" :to="'/' + item.route" :title="item.title" v-for="item in menus" :key="item.route">
-            <img :src="item.icon"></span>
-          </router-link>
-        </div>
-        <router-link class="title" tag="span" to="/dashboard"><span class="iconfont icon-licai"></span> 家庭财务管理系统</router-link>
-        <div class="pull-right">
-          <span style="margin-right: 10px;">
-            <!-- <el-avatar size="small" src="//publichz.oss-cn-hangzhou.aliyuncs.com/%E9%BB%98%E8%AE%A4%E8%B5%84%E6%BA%90/avatar.png" style="vertical-align: middle;"></el-avatar> {{roleInfo.role_name}} -->
-          </span>
-          <el-button type="text" size="large" @click="outLogin">退出登录</el-button>
+        <div class="header-wrap">
+          <div class="menu-wrap">
+            <router-link class="menu" :class="$route.name === item.route ? 'active' : ''" tag="div" :to="'/' + item.route" :title="item.title" v-for="item in menus" :key="item.route">
+              <img :src="item.icon"></span>
+            </router-link>
+          </div>
+          <router-link class="title" tag="span" to="/dashboard"><span class="iconfont icon-licai"></span> 家庭财务管理系统</router-link>
+          <div class="right-block">
+            <span style="margin-right: 10px;">
+              <!-- <el-avatar size="small" src="//publichz.oss-cn-hangzhou.aliyuncs.com/%E9%BB%98%E8%AE%A4%E8%B5%84%E6%BA%90/avatar.png" style="vertical-align: middle;"></el-avatar> {{roleInfo.role_name}} -->
+            </span>
+            <el-button type="text" size="large" @click="outLogin">退出登录</el-button>
+          </div>
         </div>
       </div>
       <div class="bottom-body">
@@ -89,7 +91,6 @@ export default {
     background-color: rgba(0,0,0,.03);
     padding: 0;
     .top-header{
-      padding: 0 20px 0 0;
       position: fixed;
       top: 0;
       left: 0;
@@ -101,50 +102,60 @@ export default {
       font-size: 14px;
       color: #666;
       z-index: 9;
-      .title{
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        font-weight: bold;
-        padding-left: 10px;
-        font-weight: 900;
-        font-size: 20px;
-        color: #3E80CC;
-        letter-spacing: 0.1em;
-        line-height: 60px;
-        vertical-align: middle;
-        cursor: pointer;
-        .icon-licai{
-          font-size: 40px;
-          vertical-align: middle;
-        }
-      }
-      .menu-wrap{
+      .header-wrap{
+        max-width: 1200px;
+        margin: 0 auto;
         display: flex;
-        .menu{
-          width: 48px;
-          height: 48px;
-          line-height: 48px;
+        justify-content: space-between;
+        .title{
           flex-grow: 1;
-          flex-shrink: 0;
-          margin: 6px;
-          box-sizing: border-box;
-          border-radius: 8px;
-          transition: all 0.3s ease-in-out;
-          &:hover{
-            cursor: pointer;
-            background-color: rgba($color:  #c5c5c5, $alpha: 0.5);
-          }
-          img{
-            width: 80%;
-            height: 80%;
-            display: inline-block;
-            margin:  0 auto;
+          font-weight: bold;
+          font-weight: 900;
+          font-size: 20px;
+          color: #3E80CC;
+          letter-spacing: 0.1em;
+          line-height: 60px;
+          vertical-align: middle;
+          text-align: center;
+          cursor: pointer;
+          .icon-licai{
+            font-size: 40px;
             vertical-align: middle;
           }
-          &.active{
-            background-color: #c5c5c5;
+        }
+        .menu-wrap{
+          width: 180px;
+          display: flex;
+          .menu{
+            text-align: center;
+            width: 48px;
+            height: 48px;
+            line-height: 48px;
+            flex-grow: 1;
+            flex-shrink: 0;
+            margin: 6px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+            &:hover{
+              cursor: pointer;
+              background-color: rgba($color:  #c5c5c5, $alpha: 0.5);
+            }
+            img{
+              width: 80%;
+              height: 80%;
+              display: inline-block;
+              margin:  0 auto;
+              vertical-align: middle;
+            }
+            &.active{
+              background-color: #c5c5c5;
+            }
           }
+        }
+        .right-block{
+          width: 180px;
+          text-align: right;
         }
       }
       .user-menu{
@@ -167,6 +178,10 @@ export default {
         flex-grow: 1;
         padding: 8px;
         box-sizing: border-box;
+        .el-card{
+          max-width: 1200px;
+          margin: 0 auto;
+        }
       }
     }
   }
