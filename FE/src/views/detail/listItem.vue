@@ -5,7 +5,12 @@
       <div class="item-info">
         <div class="amount"><i class="iconfont icon-jine"></i> {{item.amount}}</div>
         <div class="remark"><i class="iconfont icon-remarks"></i> {{item.remark}}</div>
-        <!-- <div><i class="el-icon-time"></i> {{$dayjs(item.create_time).format('YYYY-MM-DD')}}</div> -->
+      </div>
+      <div class="item-time">
+        <div class="time">{{$dayjs(item.create_time).format('YYYY / M / D')}}</div>
+      </div>
+      <div class="item-delete">
+        <el-button type="danger" icon="el-icon-delete" plain circle size="small"></el-button>
       </div>
     </div>
   </el-card>
@@ -53,6 +58,7 @@
       .amount{
         font-size: 20px;
         font-weight: bold;
+        line-height: 29px;
         .iconfont{
           font-size: 20px;
         }
@@ -63,6 +69,19 @@
           font-size: 14px;
         }
       }
+    }
+    .item-time{
+      height: 50px;
+      flex-grow: 1;
+      padding-right: 10px;
+      .time{
+        text-align: right;
+        line-height: 50px;
+      }
+    }
+    .item-delete{
+      height: 50px;
+      line-height: 50px;
     }
   }
 }

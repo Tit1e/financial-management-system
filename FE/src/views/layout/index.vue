@@ -155,6 +155,7 @@ export default {
         }
         .right-block{
           width: 180px;
+          padding-right: 10px;
           text-align: right;
         }
       }
