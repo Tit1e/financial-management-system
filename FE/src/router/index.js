@@ -27,9 +27,9 @@ const routes = [
         meta: { title: '首页', icon: 'iconfont icon-jijin' }
       },
       {
-        path: '/detail',
-        name: 'detail',
-        component: () => import('@/views/detail/index.vue'),
+        path: '/list',
+        name: 'list',
+        component: () => import('@/views/list/index.vue'),
         meta: { title: '收支明细', icon: 'iconfont icon-jijin' }
       },
       {
