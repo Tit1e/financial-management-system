@@ -64,7 +64,7 @@ export default {
             // 登录成功后设置 token，失败的处理已经过封装，错误的请求会统一进行了报错处理，不在此处体现
             setToken(res.data)
             // 跳转至角色选择页面
-            this.$router.push('/selectRoles')
+            this.$router.push('/dashboard')
           }).catch(() => {
           })
         }
