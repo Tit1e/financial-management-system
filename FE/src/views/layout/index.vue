@@ -41,7 +41,7 @@ import { mapGetters } from 'vuex'
 import { outLogin } from '@/api/login.js'
 import { removeToken } from '@/utils/cookie.js'
 import dashboard from '@/assets/svg/dashboard.svg'
-import detail from '@/assets/svg/detail.svg'
+import list from '@/assets/svg/list.svg'
 import setting from '@/assets/svg/setting.svg'
 export default {
   components: { menuBar },
@@ -59,8 +59,8 @@ export default {
         },
         {
           title: '收支明细',
-          route: 'detail',
-          icon: detail
+          route: 'list',
+          icon: list
         },
         {
           title: '系统设置',
