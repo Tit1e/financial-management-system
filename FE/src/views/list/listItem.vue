@@ -1,8 +1,8 @@
 <template>
   <el-card class="list-item" shadow="hover" :body-style="bodyStyle">
     <div class="item-content">
-      <div class="icon iconfont" v-if="item.add" :class="addForm.type === '1' ? 'icon-shourusel' : 'icon-zhichusel'" @click="handleIconClick"></div>
-      <div class="icon iconfont" v-else :class="item.type === '1' ? 'icon-shourusel' : 'icon-zhichusel'"></div>
+      <div class="icon iconfont" v-if="item.add" :class="addForm.type === 1 ? 'icon-shourusel' : 'icon-zhichusel'" @click="handleIconClick"></div>
+      <div class="icon iconfont" v-else :class="item.type === 1 ? 'icon-shourusel' : 'icon-zhichusel'"></div>
       <div class="item-info">
         <div class="amount">
           <input v-if="item.add" ref="amount" type="number" v-model="addForm.amount" placeholder="填写金额"></input>
@@ -21,17 +21,19 @@
         <div class="time">{{$dayjs(item.create_time).format('YYYY / M / D')}}</div>
       </div>
       <div class="item-add" v-if="item.add">
-        <el-button type="success" icon="el-icon-check" plain circle size="small"></el-button>
+        <el-button type="success" icon="el-icon-check" plain circle size="small" @click="add"></el-button>
         <el-button type="warning" icon="el-icon-close" plain circle size="small" @click="handleClose"></el-button>
       </div>
       <div class="item-delete" v-else>
-        <el-button type="danger" icon="el-icon-delete" plain circle size="small"></el-button>
+        <el-button type="danger" icon="el-icon-delete" plain circle size="small" @click="fdelete(item.id)"></el-button>
       </div>
     </div>
   </el-card>
 </template>
 
 <script>
+  import { add, fdelete } from '@/api/financial'
+  import { mapGetters } from 'vuex'
   export default {
     props: {
       name: 'listItem',
@@ -45,13 +47,16 @@
         addForm: {
           amount: '',
           remark: '',
-          type: '1'
+          type: 1
         },
         bodyStyle: {
           padding: '10px',
           cursor: 'pointer',
         }
       }
+    },
+    computed: {
+      ...mapGetters(['userInfo'])
     },
     created(){
       if(this.item.add) this.bodyStyle['background-color'] = '#ecf5ff'
@@ -60,6 +65,28 @@
       if(this.item.add) this.focus()
     },
     methods: {
+      add(){
+        const data = {
+          accountId: this.userInfo.id,
+          ...this.addForm
+        }
+        add(data).then(res => {
+          this.$notify.success(res.msg)
+          this.$emit('add')
+        })
+      },
+      fdelete(id){
+        this.$confirm('确认删除该记录？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          fdelete({id}).then(res => {
+            this.$notify.success(res.msg)
+            this.$emit('delete')
+          })
+        }).catch(() => {})
+      },
       focus(){
         this.$refs.amount.focus()
       },
@@ -67,10 +94,10 @@
         this.$emit('cancel')
       },
       handleIconClick(){
-        if(this.addForm.type === '1') {
-          this.addForm.type = '2'
+        if(this.addForm.type === 1) {
+          this.addForm.type = 2
         } else {
-          this.addForm.type = '1'
+          this.addForm.type = 1
         }
       }
     }
