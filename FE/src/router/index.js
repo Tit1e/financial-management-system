@@ -2,6 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '@/views/layout'
 
+import store from '@/store'
+import { userInfo } from '@/api/login.js'
+import { getToken } from '@/utils/cookie.js'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -47,3 +51,23 @@ const router = new VueRouter({
 })
 
 export default router
+
+router.beforeEach((to, from, next) => {
+  if (to.name === 'login') {
+    next()
+  } else {
+    let token = getToken()
+    if (!token) {
+      next('/login')
+    }
+    if ( !store.getters.userInfo.id ) {
+      userInfo().then(res => {
+        const {userInfo} = res.data
+        store.commit('SET_USER_INFO', userInfo)
+        next(to)
+      })
+    } else {
+      next()
+    }
+  }
+})
