@@ -11,16 +11,12 @@
           <router-link class="title" tag="span" to="/dashboard"><span class="iconfont icon-licai"></span> 家庭财务管理系统</router-link>
           <div class="right-block">
             <span style="margin-right: 10px;">
-              <!-- <el-avatar size="small" src="//publichz.oss-cn-hangzhou.aliyuncs.com/%E9%BB%98%E8%AE%A4%E8%B5%84%E6%BA%90/avatar.png" style="vertical-align: middle;"></el-avatar> {{roleInfo.role_name}} -->
             </span>
             <el-button type="text" size="large" @click="outLogin">退出登录</el-button>
           </div>
         </div>
       </div>
       <div class="bottom-body">
-        <!-- <div class="menu">
-          <menu-bar/>
-        </div> -->
         <div class="body">
           <el-card :body-style="{ 'padding': '10px', 'height': '100%', 'box-sizing': 'border-box', 'overflow-y': 'auto', 'overflow-x': 'hidden' }" shadow="never" v-autoheight>
             <transition name="fade-transform" mode="out-in">
@@ -36,7 +32,6 @@
 </template>
 
 <script>
-import menuBar from './components/menuBar'
 import { mapGetters } from 'vuex'
 import { outLogin } from '@/api/login.js'
 import { removeToken } from '@/utils/cookie.js'
@@ -44,7 +39,6 @@ import dashboard from '@/assets/svg/dashboard.svg'
 import list from '@/assets/svg/list.svg'
 import setting from '@/assets/svg/setting.svg'
 export default {
-  components: { menuBar },
   computed: {
     ...mapGetters(['userInfo', 'roleInfo'])
   },
