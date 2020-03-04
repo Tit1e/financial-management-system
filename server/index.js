@@ -3,7 +3,6 @@ const { app, Result } = require("./connent")
 const login = require("./modules/api/login")
 const account = require("./modules/api/account")
 const financial = require("./modules/api/financial")
-const publicDetail = require("./modules/api/publicDetail")
 
 app.all("*", (req, res, next) => {
   // 接口白名单，在白名单中的接口不会验证 token 有效性
@@ -28,7 +27,7 @@ app.all("*", (req, res, next) => {
   }
 })
 
-app.use("/api", login, account, financial, publicDetail)
+app.use("/api", login, account, financial)
 
 app.listen(3999, () => {
   console.log("服务在 3999 端口启用")
