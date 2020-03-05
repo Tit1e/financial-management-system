@@ -10,7 +10,7 @@
       </el-form-item>
       <el-form-item>
         <el-date-picker
-          v-model="searchForm.createTime"
+          v-model="searchForm.useTime"
           format="yyyy / M / d"
           value-format="yyyy-MM-dd"
           type="date"
@@ -27,6 +27,21 @@
       <el-form-item>
         <el-button type="primary" plain @click="addDetail" icon="el-icon-plus">添 加</el-button>
       </el-form-item>
+      <el-row v-show="pageData.pageSize < total">
+        <el-col :span="24">
+          <el-form-item>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="getList"
+            :page-sizes="[100, 150, 200, 300]"
+            :page-size="100"
+            hide-on-single-page
+            layout="total, sizes, prev, pager, next"
+            :total="total">
+          </el-pagination>
+          </el-form-item>
+        </el-col>
+      </el-row>
     </el-form>
     <el-row :gutter="10">
       <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6" v-for="item in list" :key="item.id">
@@ -49,10 +64,11 @@
         searchForm: {
           type: '',
           remark: '',
-          createTime: ''
+          useTime: ''
         },
+        total: 0,
         pageData: {
-          pageSize: 20,
+          pageSize: 100,
           pageIndex: 1
         }
       }
@@ -72,7 +88,8 @@
           ...this.pageData
         }
         list(data).then(res => {
-          this.list = res.data
+          this.list = res.data.list
+          this.total = res.data.total
         })
       },
       addDetail(data){
@@ -84,6 +101,10 @@
       },
       cancel(){
         this.list = this.list.filter(i => !i.add)
+      },
+      handleSizeChange(size){
+        this.pageData.pageSize = size
+        this.getList(this.pageData.pageIndex)
       },
     }
   }

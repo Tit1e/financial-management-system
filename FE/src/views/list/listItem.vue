@@ -17,8 +17,18 @@
           </template>
         </div>
       </div>
-      <div class="item-time" v-if="!item.add">
-        <div class="time">{{$dayjs(item.create_time).format('YYYY / M / D')}}</div>
+      <div class="item-time">
+        <template v-if="item.add">
+          <el-date-picker
+            class="use-time"
+            v-model="addForm.useTime"
+            size="mini"
+            type="date"
+            value-format="yyyy-MM-dd"
+            :clearable="false">
+          </el-date-picker>
+        </template>
+        <div class="time" v-else>{{$dayjs(item.use_time).format('YYYY / M / D')}}</div>
       </div>
       <div class="item-add" v-if="item.add">
         <el-button type="success" icon="el-icon-check" plain circle size="small" @click="add"></el-button>
@@ -43,10 +53,12 @@
       }
     },
     data() {
+      const today = this.$dayjs().format('YYYY-MM-DD')
       return {
         addForm: {
           amount: '',
           remark: '',
+          useTime: today,
           type: 1
         },
         bodyStyle: {
@@ -66,6 +78,7 @@
     },
     methods: {
       add(){
+        if(!this.addForm.amount || this.addForm.amount <= 0) return this.$notify.error('请填写正确的金额')
         const data = {
           accountId: this.userInfo.id,
           ...this.addForm
@@ -157,8 +170,27 @@
     }
     .item-time{
       height: 50px;
+      line-height: 50px;
       flex-grow: 1;
       padding-right: 10px;
+      .use-time{
+        display: inline-block;
+        vertical-align: middle;
+        width: 32px;
+        height: 32px;
+        border: 1px solid #DCDFE6;
+        box-sizing: border-box;
+        border-radius: 50%;
+        background-color: #fff;
+        &::v-deep .el-input__inner{
+          display: none;
+        }
+        &::v-deep .el-input__prefix{
+          width: 32px;
+          line-height: 32px;
+          left: 0;
+        }
+      }
       .time{
         text-align: right;
         line-height: 50px;
@@ -174,6 +206,7 @@
       height: 50px;
       line-height: 50px;
       width: 82px;
+      flex-shrink: 0;
     }
   }
 }
