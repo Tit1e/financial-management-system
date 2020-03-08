@@ -31,13 +31,13 @@
         <el-col :span="24">
           <el-form-item>
           <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="getList"
-            :page-sizes="[100, 150, 200, 300]"
-            :page-size="100"
             hide-on-single-page
             layout="total, sizes, prev, pager, next"
-            :total="total">
+            :page-sizes="[100, 150, 200, 300]"
+            :page-size="100"
+            :total="total"
+            @size-change="handleSizeChange"
+            @current-change="getList">
           </el-pagination>
           </el-form-item>
         </el-col>
@@ -70,7 +70,7 @@
         pageData: {
           pageSize: 100,
           pageIndex: 1
-        }
+        },
       }
     },
     computed: {
