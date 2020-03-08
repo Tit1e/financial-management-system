@@ -26,3 +26,11 @@ export function fdelete(data = '') {
     data: data
   })
 }
+// 首页数据
+export function dashboard(data = '') {
+  return fetch({
+    method: 'post',
+    url: '/api/financial/dashboard',
+    data: data
+  })
+}
