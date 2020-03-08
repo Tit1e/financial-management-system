@@ -160,7 +160,7 @@
       }
       .remark{
         white-space: nowrap;
-        text-overflow:ellipsis; 
+        text-overflow:ellipsis;
         overflow:hidden;
         font-size: 14px;
         .iconfont{
