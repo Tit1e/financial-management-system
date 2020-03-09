@@ -1,8 +1,8 @@
 <template>
-  <div class="list">
+  <div class="list" v-loading="loading">
     <el-form ref="searchForm" size="small" :model="searchForm" inline @keyup.native.entr="getList()">
       <el-form-item>
-        <el-radio-group v-model="searchForm.type">
+        <el-radio-group v-model="searchForm.type" @change="getList(1)">
           <el-radio-button label="">全部</el-radio-button>
           <el-radio-button :label="1">收入</el-radio-button>
           <el-radio-button :label="2">支出</el-radio-button>
@@ -33,6 +33,7 @@
           <el-pagination
             hide-on-single-page
             layout="total, sizes, prev, pager, next"
+            :current-page="pageData.pageIndex"
             :page-sizes="[100, 150, 200, 300]"
             :page-size="100"
             :total="total"
@@ -66,6 +67,7 @@
           remark: '',
           useTime: ''
         },
+        loading: false,
         total: 0,
         pageData: {
           pageSize: 100,
@@ -81,6 +83,7 @@
     },
     methods: {
       getList(page = 1){
+        this.loading = true
         this.pageData.pageIndex = page
         const data = {
           accountId: this.userInfo.id,
@@ -90,6 +93,9 @@
         list(data).then(res => {
           this.list = res.data.list
           this.total = res.data.total
+          this.loading = false
+        }).catch(() => {
+          this.loading = false
         })
       },
       addDetail(data){
