@@ -64,9 +64,6 @@ export default {
       ]
     }
   },
-  created(){
-    console.log(dashboard)
-  },
   methods: {
     outLogin(){
       outLogin().then(() => {
