@@ -26,10 +26,6 @@ router.post('/login/user_login', async (req, res) => {
   }
 })
 
-// 退出登录
-router.post('/login/out_login', async (req, res) => {
-  return res.json(new Result({ code: 0, msg: '退出成功' }))
-})
 
 // 根据 token 获取用户信息
 router.post('/login/user_info', async (req, res) => {
