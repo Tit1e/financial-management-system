@@ -8,7 +8,7 @@
               <el-radio-button :label="key" v-for="(value, key) in pieMap" :key="key">{{value}}</el-radio-button>
             </el-radio-group>
           </div>
-          <v-chart :options="pieOptions" autoresize/>
+          <v-chart :options="pieOptions" theme="macarons" autoresize/>
         </el-card>
       </el-col>
       <el-col :span="16">
@@ -18,7 +18,7 @@
               <el-radio-button :label="key" v-for="(value, key) in barMap" :key="key">{{value}}</el-radio-button>
             </el-radio-group>
           </div>
-          <v-chart :options="barOptions" autoresize/>
+          <v-chart :options="barOptions" theme="macarons" autoresize/>
         </el-card>
       </el-col>
     </el-row>
@@ -33,6 +33,7 @@
   import 'echarts/lib/chart/pie'
   import 'echarts/lib/chart/bar'
   import 'echarts/lib/chart/line'
+  import 'echarts/theme/macarons'
   import { dashboard } from '@/api/financial'
   import { mapGetters } from 'vuex'
   export default {
@@ -53,7 +54,7 @@
           legend: {
             orient: 'vertical',
             left: 'left',
-            data: []
+            data: ['支出', '收入']
           },
           series: {
             name: '总计',
@@ -153,7 +154,6 @@
       setPie(type = 'day'){
         const data = this.pieData[type]
         this.pieOptions.series.data = data
-        this.pieOptions.legend.data = data.map(i => i.name)
       },
       setBar(type = 'day'){
         const data = this.barData[type]
